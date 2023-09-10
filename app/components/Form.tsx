@@ -6,7 +6,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement> {
 
 export const Form = ({ children, ...rest }: Props) => {
   return (
-    <form className="flex flex-col w-full" {...rest}>
+    <form className="w-full flex flex-col justify-between my-5" {...rest}>
       {children}
     </form>
   )
