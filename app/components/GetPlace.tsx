@@ -1,5 +1,4 @@
 "use client"
-
 import { FocusEvent, FormEvent, useState } from "react"
 import { usePlacesWidget } from "react-google-autocomplete"
 import { Input } from "./Input"
@@ -9,7 +8,7 @@ import { ErrorMessage } from "../types/ErrorMessage"
 import { useMovingDispatcher } from "../store/useMovingDispatcher"
 import { Form } from "./Form"
 
-export default function GetPlace() {
+const GetPlace = () => {
   const [address, setAddress] = useState("")
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>("")
   const { setPlace } = useMovingDispatcher()
@@ -54,3 +53,5 @@ export default function GetPlace() {
     </>
   )
 }
+
+export default GetPlace

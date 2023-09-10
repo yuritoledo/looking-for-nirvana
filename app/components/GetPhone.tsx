@@ -1,5 +1,4 @@
 "use client"
-
 import { ChangeEvent, FormEvent, useState } from "react"
 import { phoneLength, phoneMask } from "../utils/phone"
 import { Input } from "./Input"
@@ -9,7 +8,7 @@ import { useMovingDispatcher } from "../store/useMovingDispatcher"
 import { ErrorMessage } from "../types/ErrorMessage"
 import { Form } from "./Form"
 
-export default function GetPhone() {
+const GetPhone = () => {
   const [value, setValue] = useState("")
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>("")
   const { setPhone } = useMovingDispatcher()
@@ -59,3 +58,5 @@ export default function GetPhone() {
     </>
   )
 }
+
+export default GetPhone
