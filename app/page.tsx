@@ -3,18 +3,20 @@
 import clsx from "clsx"
 import { useState } from "react"
 import { usePlacesWidget } from "react-google-autocomplete"
+import { useAppDispatch, useAppSelector } from "./store/hooks"
+import { setPlace, setStep } from "./store/movingSlicer"
 
 export default function Home() {
-  const [place, setPlace] = useState("")
+  const dispatch = useAppDispatch()
+  const place = useAppSelector(state => state.moving.place)
   const [hasError, setHasError] = useState(false)
 
   const { ref } = usePlacesWidget({
     apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
     onPlaceSelected: place => {
-      setPlace(place.formatted_address)
+      dispatch(setPlace(place.formatted_address))
       setHasError(false)
     },
-    inputAutocompleteValue: place,
     options: {
       types: ["(regions)"],
       componentRestrictions: { country: "us" },
@@ -33,13 +35,15 @@ export default function Home() {
   }
 
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setPlace(event.target.value)
+    dispatch(setPlace(event.target.value))
   }
 
   const inputClass = clsx("border border-gray-300 rounded-md p-4 w-full", {
     "border-red-500": hasError,
     "mb-10": !hasError,
   })
+
+  console.log(place)
 
   return (
     <main className="flex flex-col items-center justify-between py-24 px-5">
