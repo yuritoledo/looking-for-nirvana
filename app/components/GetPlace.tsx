@@ -2,16 +2,17 @@
 import { FocusEvent, FormEvent, useState } from "react"
 import { usePlacesWidget } from "react-google-autocomplete"
 import { Input } from "./Input"
-import { NextButton } from "./NextButton"
+import { ActionButton } from "./ActionButton"
 import { Title } from "./Title"
 import { ErrorMessage } from "../types/ErrorMessage"
-import { useMovingDispatcher } from "../store/useMovingDispatcher"
 import { Form } from "./Form"
+import { useAppDispatch } from "../store/hooks"
+import { setPlace } from "../store/movingSlicer"
 
 const GetPlace = () => {
   const [address, setAddress] = useState("")
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>("")
-  const { setPlace } = useMovingDispatcher()
+  const dispatch = useAppDispatch()
 
   const { ref } = usePlacesWidget({
     apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
@@ -34,7 +35,7 @@ const GetPlace = () => {
     }
 
     setErrorMessage(null)
-    setPlace(address)
+    dispatch(setPlace(address))
   }
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -42,15 +43,14 @@ const GetPlace = () => {
   }
 
   return (
-    <>
+    <div>
       <Title>Where are you moving from?</Title>
 
       <Form onSubmit={onSubmit}>
         <Input ref={ref} onBlur={onBlur} errorMessage={errorMessage} />
-
-        <NextButton />
+        <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
-    </>
+    </div>
   )
 }
 

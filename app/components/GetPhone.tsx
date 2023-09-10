@@ -2,17 +2,17 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { phoneLength, phoneMask } from "../utils/phone"
 import { Input } from "./Input"
-import { NextButton } from "./NextButton"
 import { Title } from "./Title"
-import { useMovingDispatcher } from "../store/useMovingDispatcher"
 import { ErrorMessage } from "../types/ErrorMessage"
 import { Form } from "./Form"
+import { ActionButton } from "./ActionButton"
+import { useAppDispatch } from "../store/hooks"
+import { setPhone } from "../store/movingSlicer"
 
 const GetPhone = () => {
   const [value, setValue] = useState("")
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>("")
-  const { setPhone } = useMovingDispatcher()
-
+  const dispatch = useAppDispatch()
   const phoneValidator = (value: string) =>
     value.length !== phoneLength ? "Please enter a valid phone number" : ""
 
@@ -26,7 +26,7 @@ const GetPhone = () => {
     }
 
     setErrorMessage(null)
-    setPhone(value)
+    dispatch(setPhone(value))
   }
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ const GetPhone = () => {
           onBlur={onBlur}
         />
 
-        <NextButton />
+        <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
     </>
   )
