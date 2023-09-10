@@ -7,7 +7,7 @@ interface MovingSlicer {
 }
 
 const initialState: MovingSlicer = {
-  step: 0,
+  step: 1,
   place: "",
   phone: "",
 }
@@ -16,14 +16,16 @@ const movingSlicer = createSlice({
   name: "moving",
   initialState,
   reducers: {
-    setStep: (state, action: PayloadAction<number>) => {
-      state.step = action.payload
-    },
     setPlace: (state, action: PayloadAction<string>) => {
       state.place = action.payload
+      state.step++
+    },
+    setPhone: (state, action: PayloadAction<string>) => {
+      state.phone = action.payload
+      state.step++
     },
   },
 })
 
-export const { setPlace, setStep } = movingSlicer.actions
+export const { setPlace, setPhone } = movingSlicer.actions
 export default movingSlicer.reducer
