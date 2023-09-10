@@ -1,62 +1,21 @@
 "use client"
 
-import clsx from "clsx"
-import { useState } from "react"
-import { usePlacesWidget } from "react-google-autocomplete"
-import { useAppDispatch, useAppSelector } from "./store/hooks"
-import { setPlace, setStep } from "./store/movingSlicer"
+import { useAppSelector } from "./store/hooks"
+import GetPlace from "./components/GetPlace"
+import GetPhone from "./components/GetPhone"
+import Summary from "./components/Summary"
+import ProgressBar from "./components/ProgressBar"
 
 export default function Home() {
-  const dispatch = useAppDispatch()
-  const place = useAppSelector(state => state.moving.place)
-  const [hasError, setHasError] = useState(false)
-
-  const { ref } = usePlacesWidget({
-    apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
-    onPlaceSelected: place => {
-      dispatch(setPlace(place.formatted_address))
-      setHasError(false)
-    },
-    options: {
-      types: ["(regions)"],
-      componentRestrictions: { country: "us" },
-    },
-  })
-
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    if (!place) {
-      setHasError(true)
-      return
-    }
-
-    setHasError(false)
-  }
-
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    dispatch(setPlace(event.target.value))
-  }
-
-  const inputClass = clsx("border border-gray-300 rounded-md p-4 w-full", {
-    "border-red-500": hasError,
-    "mb-10": !hasError,
-  })
-
-  console.log(place)
+  const step = useAppSelector(state => state.moving.step)
 
   return (
-    <main className="flex flex-col items-center justify-between py-24 px-5">
-      <p className="text-2xl font-bold">Where are you moving from?</p>
+    <main className="flex flex-col items-center justify-between my-2 px-5">
+      <ProgressBar />
 
-      <form className="flex sm:flex-col w-full" onSubmit={onSubmit}>
-        <input ref={ref} className={inputClass} onBlur={onBlur} />
-        {hasError && <p className="text-red-500 pb-4">Please get a location</p>}
-
-        <button className="sm:bg-blue-500 text-white rounded-md p-4">
-          Next
-        </button>
-      </form>
+      {step === 1 && <GetPlace />}
+      {step === 2 && <GetPhone />}
+      {step === 3 && <Summary />}
     </main>
   )
 }
