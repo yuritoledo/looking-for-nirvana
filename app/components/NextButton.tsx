@@ -1,3 +1,3 @@
-export function NextButton() {
+export const NextButton = () => {
   return <button className="bg-blue-500 text-white rounded-md p-4">Next</button>
 }

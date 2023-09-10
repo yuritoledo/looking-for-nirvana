@@ -7,7 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   ref?: any
 }
 
-export function Input(props: Props) {
+export const Input = (props: Props) => {
   const { errorMessage, ...rest } = props
 
   const className = clsx("border border-gray-300 rounded-md p-4 w-full", {

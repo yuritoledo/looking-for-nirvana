@@ -4,6 +4,6 @@ interface Props {
   children: ReactNode
 }
 
-export default function Title({ children }: Props) {
+export const Title = ({ children }: Props) => {
   return <p className="text-2xl font-bold">{children}</p>
 }
