@@ -4,9 +4,10 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { phoneLength, phoneMask } from "../utils/phone"
 import { Input } from "./Input"
 import { NextButton } from "./NextButton"
-import Title from "./Title"
+import { Title } from "./Title"
 import { useMovingDispatcher } from "../store/useMovingDispatcher"
 import { ErrorMessage } from "../types/ErrorMessage"
+import { Form } from "./Form"
 
 export default function GetPhone() {
   const [value, setValue] = useState("")
@@ -44,7 +45,7 @@ export default function GetPhone() {
     <>
       <Title>What is your phone number?</Title>
 
-      <form className="flex flex-col w-full" onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <Input
           type="tel"
           value={value}
@@ -54,7 +55,7 @@ export default function GetPhone() {
         />
 
         <NextButton />
-      </form>
+      </Form>
     </>
   )
 }
