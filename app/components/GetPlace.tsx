@@ -43,14 +43,14 @@ const GetPlace = () => {
   }
 
   return (
-    <div>
+    <>
       <Title>Where are you moving from?</Title>
 
       <Form onSubmit={onSubmit}>
         <Input ref={ref} onBlur={onBlur} errorMessage={errorMessage} />
         <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
-    </div>
+    </>
   )
 }
 
