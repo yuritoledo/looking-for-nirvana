@@ -8,6 +8,7 @@ import { Form } from "./Form"
 import { ActionButton } from "./ActionButton"
 import { useAppDispatch } from "../store/hooks"
 import { setPhone } from "../store/movingSlicer"
+import StepsContainer from "./StepsContainer"
 
 const GetPhone = () => {
   const [value, setValue] = useState("")
@@ -41,7 +42,7 @@ const GetPhone = () => {
   }
 
   return (
-    <>
+    <StepsContainer>
       <Title hasBack>What is your phone number?</Title>
 
       <Form onSubmit={onSubmit}>
@@ -55,7 +56,7 @@ const GetPhone = () => {
 
         <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
-    </>
+    </StepsContainer>
   )
 }
 

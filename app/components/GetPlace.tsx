@@ -8,6 +8,7 @@ import { ErrorMessage } from "../types/ErrorMessage"
 import { Form } from "./Form"
 import { useAppDispatch } from "../store/hooks"
 import { setPlace } from "../store/movingSlicer"
+import StepsContainer from "./StepsContainer"
 
 const GetPlace = () => {
   const [address, setAddress] = useState("")
@@ -43,14 +44,14 @@ const GetPlace = () => {
   }
 
   return (
-    <>
+    <StepsContainer>
       <Title>Where are you moving from?</Title>
 
       <Form onSubmit={onSubmit}>
         <Input ref={ref} onBlur={onBlur} errorMessage={errorMessage} />
         <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
-    </>
+    </StepsContainer>
   )
 }
 

@@ -4,12 +4,14 @@ interface MovingSlicer {
   step: number
   place: string
   phone: string
+  isBack: boolean
 }
 
 const initialState: MovingSlicer = {
   step: 1,
   place: "",
   phone: "",
+  isBack: false,
 }
 
 const movingSlicer = createSlice({
@@ -31,6 +33,7 @@ const movingSlicer = createSlice({
     },
     goBack: state => {
       state.step--
+      state.isBack = true
     },
   },
 })

@@ -13,10 +13,9 @@ const Summary = () => {
   }
 
   return (
-    <div className="flex flex-col justify-between w-full h-full">
+    <div className="flex flex-col justify-between w-full h-full animate-toLeft">
       <div className="flex flex-col items-center justify-between mb-4">
         <Title>Summary</Title>
-        {/* <h1 className="text-3xl font-bold mb-8 font">Summary</h1> */}
         <p className="text-xl mb-2">
           <span className="font-bold">Place:</span> {place}
         </p>
