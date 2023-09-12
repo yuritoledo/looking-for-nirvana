@@ -22,7 +22,10 @@ export const Title = ({ children, hasBack }: Props) => {
       })}
     >
       {hasBack && (
-        <button onClick={onClick}>
+        <button
+          className="h-10 w-10 flex justify-center items-center hover:bg-gray-100 transition-all duration-500 rounded-md"
+          onClick={onClick}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
