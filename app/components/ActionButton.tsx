@@ -13,7 +13,7 @@ export const ActionButton = ({
   ...rest
 }: Props) => {
   const classNames = clsx(
-    "text-white rounded-md p-4 font-bold text-lg",
+    "text-white rounded-md p-4 font-bold text-xl",
     className,
     {
       "bg-blue-500 hover:bg-blue-700": variant === "nextStep",

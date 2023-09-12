@@ -42,7 +42,7 @@ const GetPhone = () => {
 
   return (
     <>
-      <Title>What is your phone number?</Title>
+      <Title hasBack>What is your phone number?</Title>
 
       <Form onSubmit={onSubmit}>
         <Input

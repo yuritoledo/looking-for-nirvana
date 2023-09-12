@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { startOver } from "../store/movingSlicer"
 import { ActionButton } from "./ActionButton"
+import { Title } from "./Title"
 
 const Summary = () => {
   const place = useAppSelector(state => state.moving.place)
@@ -12,9 +13,10 @@ const Summary = () => {
   }
 
   return (
-    <div className="flex flex-col justify-between w-full h-full my-10">
+    <div className="flex flex-col justify-between w-full h-full">
       <div className="flex flex-col items-center justify-between mb-4">
-        <h1 className="text-3xl font-bold mb-8 font">Summary</h1>
+        <Title>Summary</Title>
+        {/* <h1 className="text-3xl font-bold mb-8 font">Summary</h1> */}
         <p className="text-xl mb-2">
           <span className="font-bold">Place:</span> {place}
         </p>

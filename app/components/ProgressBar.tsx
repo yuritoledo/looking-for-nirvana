@@ -5,7 +5,7 @@ const ProgressBar = () => {
   const step = useAppSelector(state => state.moving.step)
 
   const containerClassName = clsx(
-    "flex justify-between w-full py-4 duration-500 delay-300 ease-in-out",
+    "flex justify-between w-full py-4 duration-500 delay-300 ease-in-out mt-4 mb-24",
     {
       "opacity-0": step == 1,
       "opacity-1": step > 1,
