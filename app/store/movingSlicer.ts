@@ -29,8 +29,11 @@ const movingSlicer = createSlice({
       state.place = ""
       state.phone = ""
     },
+    goBack: state => {
+      state.step--
+    },
   },
 })
 
-export const { setPlace, setPhone, startOver } = movingSlicer.actions
+export const { setPlace, setPhone, startOver, goBack } = movingSlicer.actions
 export default movingSlicer.reducer
