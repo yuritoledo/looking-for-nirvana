@@ -1,31 +1,46 @@
 "use client"
-import { FocusEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from "react"
 import { usePlacesWidget } from "react-google-autocomplete"
 import { Input } from "./Input"
 import { ActionButton } from "./ActionButton"
 import { Title } from "./Title"
 import { ErrorMessage } from "../types/ErrorMessage"
 import { Form } from "./Form"
-import { useAppDispatch } from "../store/hooks"
+import { useAppDispatch, useAppSelector } from "../store/hooks"
 import { setPlace } from "../store/movingSlicer"
 import StepsContainer from "./StepsContainer"
 
 const GetPlace = () => {
   const [address, setAddress] = useState("")
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>("")
+  const [isDirty, setIsDirty] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null)
   const dispatch = useAppDispatch()
+  const place = useAppSelector(state => state.moving.place)
+
+  useEffect(() => {
+    if (place) {
+      setAddress(place)
+      setIsDirty(false)
+    }
+  }, [place])
 
   const { ref } = usePlacesWidget({
     apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
     onPlaceSelected: place => {
       setAddress(place.formatted_address)
-      setErrorMessage("")
+      setIsDirty(false)
+      setErrorMessage(null)
     },
     options: {
       types: ["(regions)"],
       componentRestrictions: { country: "us" },
     },
   })
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setAddress(event.target.value)
+    setIsDirty(true)
+  }
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -35,12 +50,13 @@ const GetPlace = () => {
       return
     }
 
+    if (isDirty) {
+      setErrorMessage("Please get valid a location")
+      return
+    }
+
     setErrorMessage(null)
     dispatch(setPlace(address))
-  }
-
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    setAddress(event.target.value)
   }
 
   return (
@@ -48,7 +64,12 @@ const GetPlace = () => {
       <Title>Where are you moving from?</Title>
 
       <Form onSubmit={onSubmit}>
-        <Input ref={ref} onBlur={onBlur} errorMessage={errorMessage} />
+        <Input
+          ref={ref}
+          errorMessage={errorMessage}
+          value={address}
+          onChange={onChange}
+        />
         <ActionButton variant="nextStep">Next</ActionButton>
       </Form>
     </StepsContainer>
