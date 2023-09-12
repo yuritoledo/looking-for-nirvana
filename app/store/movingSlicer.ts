@@ -21,6 +21,7 @@ const movingSlicer = createSlice({
     setPlace: (state, action: PayloadAction<string>) => {
       state.place = action.payload
       state.step++
+      state.isBack = false
     },
     setPhone: (state, action: PayloadAction<string>) => {
       state.phone = action.payload

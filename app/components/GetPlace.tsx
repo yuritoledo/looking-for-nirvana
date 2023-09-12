@@ -22,7 +22,7 @@ const GetPlace = () => {
       setAddress(place)
       setIsDirty(false)
     }
-  }, [place])
+  }, [place, dispatch])
 
   const { ref } = usePlacesWidget({
     apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
