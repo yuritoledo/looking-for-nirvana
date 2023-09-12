@@ -9,6 +9,7 @@ interface Props {
 const StepsContainer = ({ children }: Props) => {
   const isBack = useAppSelector(state => state.moving.isBack)
   const step = useAppSelector(state => state.moving.step)
+
   return (
     <div
       className={clsx("w-full", {

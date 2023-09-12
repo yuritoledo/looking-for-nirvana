@@ -1,9 +1,7 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { Providers } from "./store/provider"
 import { ReactNode } from "react"
-import clsx from "clsx"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,9 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <span className="text-white">Nirvana</span>
           </h1>
         </nav>
-        <main className="flex flex-col items-center">
-          <Providers>{children}</Providers>
-        </main>
+        <main className="flex flex-col items-center">{children}</main>
       </body>
     </html>
   )
