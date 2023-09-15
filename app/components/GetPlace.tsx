@@ -25,7 +25,7 @@ const GetPlace = () => {
   }, [place, dispatch])
 
   const { ref } = usePlacesWidget({
-    apiKey: "AIzaSyDEcwhXPX4gPbP-6FINDoWrA0YxeDEJwYc",
+    apiKey: "",
     onPlaceSelected: place => {
       setAddress(place.formatted_address)
       setIsDirty(false)
